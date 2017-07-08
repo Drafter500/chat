@@ -18,7 +18,7 @@ $(document).ready(() => {
     //     console.log('success');
     //   });
 
-    $.get(`${basePath}/users`, function(res){
+    $.get(`${basePath}/users`, (res) => {
       console.log(res);
     });
 
@@ -30,5 +30,5 @@ ReactDOM.render(
     67868
   </div>
   ,
-  document.getElementById('root')
+  document.getElementById('root'),
 );
