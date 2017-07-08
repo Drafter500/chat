@@ -1,24 +1,39 @@
 var LiveReloadPlugin = require('webpack-livereload-plugin');
+var path = require('path');
 
 module.exports = {
-  entry: './public/index.js',
+  entry: './front/index.js',
   output: {
-    path: './public',
-    filename: 'bundle.js'       
+    path: path.resolve(__dirname, 'public'),
+    filename: 'bundle.js',
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'babel-loader'
-      }
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['env'],
+          },
+        },
+      },
+      {
+        test: /\.sass$/,
+        use: [
+          {
+            loader: 'style-loader',
+          }, {
+            loader: 'css-loader',
+          }, {
+            loader: 'sass-loader',
+          },
+        ],
+      },
     ]
   },
-  resolve: {
-    extensions: ['', '.js', '.json'] 
-  },
   plugins: [
-    new LiveReloadPlugin()
+    new LiveReloadPlugin({appendScriptTag: true}),
   ]
 };

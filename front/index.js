@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
+import './style.sass';
 
 const backendUrl = 'http://localhost';
 const port = 3000;
@@ -26,6 +26,9 @@ $(document).ready(() => {
 });
 
 ReactDOM.render(
-  <br />,
+  <div>
+    67868
+  </div>
+  ,
   document.getElementById('root')
 );
