@@ -1,10 +1,12 @@
-var express = require('express');
+const express = require('express');
+const path = require('path');
 const bodyParser = require('body-parser');
 
 var app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
+
 
 app.post('/', function(req, res) {
   console.log(req.body);
@@ -14,6 +16,8 @@ app.post('/', function(req, res) {
 app.get('/users', function(req, res) {
   res.json([{username: 'Vasya', age: 15, gender: 'male'}]);
 });
+
+app.all('*', (req, res) => res.sendFile(path.resolve(__dirname, '../public/index.html')));
 
 app.listen(process.env.PORT || 3000, () => {
   console.log('Server is running');

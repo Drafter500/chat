@@ -1,5 +1,5 @@
-var LiveReloadPlugin = require('webpack-livereload-plugin');
-var path = require('path');
+const LiveReloadPlugin = require('webpack-livereload-plugin');
+const path = require('path');
 
 module.exports = {
   entry: './front/index.js',
@@ -31,9 +31,9 @@ module.exports = {
           },
         ],
       },
-    ]
+    ],
   },
   plugins: [
-    new LiveReloadPlugin({appendScriptTag: true}),
-  ]
+    new LiveReloadPlugin({ appendScriptTag: true }),
+  ],
 };
