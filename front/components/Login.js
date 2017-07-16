@@ -1,24 +1,49 @@
 import React from 'react';
+import $ from 'jquery';
+import history from '../config/history';
 
 
 class Login extends React.Component {
 
-  handleLogin = () => {
-    alert('login');
+  handleLogin = (e) => {
+    e.preventDefault();
+    const data = {};
+    $(this.form).serializeArray().forEach(item => data[item.name] = item.value);
+    history.replace('/room');
   }
 
 
   render() {
     return (
-      <div className="enter-form">
-        <div className="form-item"><span>Username: </span><input type="text" id="username" /></div>
-        <div className="form-item"><span>Age: </span><input type="number" id="age" /></div>
+      <form
+        ref={(e) => this.form = e}
+        className="enter-form"
+      >
+        <div className="form-item">
+          <span>Username: </span>
+          <input
+            ref={(e) => this.username = e}
+            type="text"
+            name="username"
+            />
+        </div>
+        <div className="form-item">
+          <span>Age: </span>
+          <input
+            ref={(e) => this.age = e}
+            type="number"
+            name="age"
+            />
+        </div>
         <div className="form-item">
             <span>Gender: </span>
-            <select id="gender">
+            <select
+              ref={(e) => this.gender = e}
+              name="gender"
+            >
                 <option value="male">Male</option>
                 <option value="female">Female</option>
-              </select>
+            </select>
           </div>
         <br />
         <div className="form-item">
@@ -29,7 +54,7 @@ class Login extends React.Component {
             Enter the room
           </button>
         </div>
-      </div>
+      </form>
     );
   }
 }
