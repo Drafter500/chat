@@ -5,7 +5,7 @@ class NotFoundPage extends React.Component {
 
   render() {
     return (
-      <div>Not Found Page</div>
+      <div>404, Сорян :(</div>
     )
   }
 };

@@ -1,11 +1,15 @@
 import React from 'react';
+import Login from '../components/Login';
 
 
 class HomePage extends React.Component {
 
   render() {
     return (
-      <div>Home Page</div>
+      <div>
+        <h1>Welcome!</h1>
+        <Login />
+      </div>
     )
   }
 };
