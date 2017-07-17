@@ -1,6 +1,6 @@
 import React from 'react';
-import $ from 'jquery';
 import history from '../config/history';
+import AuthService from '../services/auth';
 
 
 class Login extends React.Component {
@@ -9,6 +9,7 @@ class Login extends React.Component {
     e.preventDefault();
     const data = {};
     $(this.form).serializeArray().forEach(item => data[item.name] = item.value);
+    AuthService.login(data);
     history.replace('/room');
   }
 
