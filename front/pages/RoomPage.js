@@ -1,11 +1,12 @@
 import React from 'react';
+import ChatWidget from '../components/ChatWidget/ChatWidget';
 
 
 class RoomPage extends React.Component {
 
   render() {
     return (
-      <div>Room Page</div>
+      <ChatWidget />
     )
   }
 };

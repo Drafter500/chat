@@ -1,0 +1,25 @@
+.chatWidget
+  border: 1px solid black
+  height: calc(100vh - 100px)
+  min-height: 100px
+  display: flex
+  flex-wrap: wrap
+
+  &-messageBox
+    border: 1px solid red
+    flex-grow: 1
+    height: 100%
+
+  &-participantList
+    border: 1px solid blue
+    width: 100px
+    flex-basis: 250px
+
+  &-controlsPanel
+    border: 1px solid green
+    width: 100%
+    display: flex
+
+    &-textInput
+      display: inline-block
+      flex-grow: 1
