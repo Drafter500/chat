@@ -1,4 +1,5 @@
 import React from 'react';
+import $ from 'jquery';
 import history from '../config/history';
 import AuthService from '../services/auth';
 

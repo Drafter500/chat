@@ -1,12 +1,18 @@
 import React from 'react';
+import $ from 'jquery';
 import './styles/main.sass';
 
 
 class ChatWidget extends React.Component {
 
+  componentWillMount() {
+    this.socket = io();
+  }
+
   handleSendClick = () => {
-    const message = this.inputMessage.childNodes[0].nodeValue;
-    // Call message service here
+    const message = $(this.inputMessage).text();
+    this.socket.emit('chat message', message);
+    $(this.inputMessage).text('');
   }
 
   render() {
