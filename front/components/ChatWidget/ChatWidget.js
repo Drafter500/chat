@@ -13,14 +13,22 @@ class ChatWidget extends React.Component {
   }
 
   componentWillMount() {
-    this.socket = io();
+    const userName = prompt('User name:');
+    console.log(userName);
+    this.socket = io({
+      query: {
+        username: userName,
+      }
+    });
+    this.socket.on('message arrived', (answer) => {
+      console.log('message arrived event caught');
+      this.setState({ messages: this.state.messages.concat(answer)});
+    });
   }
 
   handleSendClick = () => {
     const message = $(this.inputMessage).text();
-    this.socket.emit('chat message', message, (answer) => {
-      this.setState({ messages: this.state.messages.concat(answer)});
-    });
+    this.socket.emit('chat message', message);
     $(this.inputMessage).text('');
   }
 
