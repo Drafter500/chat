@@ -15,8 +15,9 @@ app.use(express.static('public'));
 
 io.on('connection', (socket) => {
   console.log('user connected');
-  socket.on('chat message', (msg) => {
+  socket.on('chat message', (msg, fn) => {
     console.log(`message: ${  msg}`);
+    fn(msg);
   });
 });
 // app.all('*', (req, res) => res.sendFile(path.resolve(__dirname, '../public/index.html')));
