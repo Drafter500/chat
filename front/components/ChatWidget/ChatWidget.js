@@ -14,26 +14,30 @@ class ChatWidget extends React.Component {
 
   componentWillMount() {
     const userName = prompt('User name:');
-    console.log(userName);
     this.socket = io({
       query: {
         username: userName,
       }
     });
     this.socket.on('message arrived', (answer) => {
-      console.log('message arrived event caught');
       this.setState({ messages: this.state.messages.concat(answer)});
     });
   }
 
-  handleSendClick = () => {
+  handleMessageSend = () => {
     const message = $(this.inputMessage).text();
     this.socket.emit('chat message', message);
     $(this.inputMessage).text('');
   }
 
+  handleInputKeyPress = (e) => {
+    if (e.key == 'Enter') {
+      e.preventDefault();
+      this.handleMessageSend();
+    }
+  }
+
   render() {
-    console.log(this.state.messages);
     return (
       <section className="chatWidget">
         <div className="chatWidget-messageBox">
@@ -47,10 +51,11 @@ class ChatWidget extends React.Component {
             className="chatWidget-controlsPanel-textInput"
             contentEditable
             ref={(el) => { this.inputMessage = el; }}
+            onKeyPress={this.handleInputKeyPress}
            />
           <button
             className="chatWidget-controlsPanel-sendButton"
-            onClick={this.handleSendClick}
+            onClick={this.handleMessageSend}
           >
             Send
           </button>
