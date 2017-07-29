@@ -1,13 +1,13 @@
 import $ from 'jquery';
-import { resolveUrl } from '../config/config';
+import history from '../config/history';
 
 
 const AuthService = {
   login(userData) {
     $.post('login', userData).done(() => {
-      alert('login success');
+      history.replace('/room');
     });
-  }
+  },
 };
 
 export default AuthService;

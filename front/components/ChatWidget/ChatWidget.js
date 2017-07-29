@@ -13,12 +13,7 @@ class ChatWidget extends React.Component {
   }
 
   componentWillMount() {
-    const userName = prompt('User name:');
-    this.socket = io({
-      query: {
-        username: userName,
-      }
-    });
+    this.socket = io();
     this.socket.on('message arrived', (answer) => {
       this.setState({ messages: this.state.messages.concat(answer)});
     });
