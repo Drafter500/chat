@@ -9,6 +9,7 @@ class ChatWidget extends React.Component {
     super(props);
     this.state = {
       messages: [],
+      participants: [],
     };
   }
 
@@ -16,6 +17,9 @@ class ChatWidget extends React.Component {
     this.socket = io();
     this.socket.on('message arrived', (answer) => {
       this.setState({ messages: this.state.messages.concat(answer)});
+    });
+    this.socket.on('participants updated', (participants) => {
+      this.setState({ participants });
     });
   }
 
@@ -40,7 +44,11 @@ class ChatWidget extends React.Component {
           this.state.messages.map(msg => <p>{msg}</p>)
         }
         </div>
-        <div className="chatWidget-participantList" />
+        <div className="chatWidget-participantList">
+        {
+          this.state.participants.map(user => <p>{user.username}</p>)
+        }
+        </div>
         <div className="chatWidget-controlsPanel">
           <span
             className="chatWidget-controlsPanel-textInput"

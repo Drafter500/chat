@@ -15,7 +15,7 @@ export default function initializeChat(server) {
 
     // TODO: process credentials, check if user exists, if not, add him to the list
     participants.push(credentials);
-    //io.emit('participants updated', participants);
+    io.emit('participants updated', participants);
 
     console.log('user connected');
     const user = credentials.username;
