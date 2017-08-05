@@ -9,8 +9,6 @@ import { TOKEN_KEY } from './constants';
 
 
 const app = express();
-app.use(expressJwt({ secret: 'the real true secret' }).unless({ path: ['/', '/bundle.js', '/login', '/users'] }));
-app.use(cookieParser());
 
 const server = app.listen(process.env.PORT || 3000, () => {
   console.log('Server is running');
@@ -22,6 +20,9 @@ chatRoom(server);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
+
+app.use(expressJwt({ secret: 'the real true secret' }).unless({ path: ['/', '/login', '/users'] }));
+app.use(cookieParser());
 // app.all('*', (req, res) => res.sendFile(path.resolve(__dirname, '../public/index.html')));
 
 
