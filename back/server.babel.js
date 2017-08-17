@@ -20,11 +20,21 @@ chatRoom(server);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
-
-app.use(expressJwt({ secret: 'the real true secret' }).unless({ path: ['/', '/login', '/users'] }));
 app.use(cookieParser());
-// app.all('*', (req, res) => res.sendFile(path.resolve(__dirname, '../public/index.html')));
 
+app.use(expressJwt({
+  secret: 'the real true secret',
+  getToken: function fromCookie(req) {
+    return req.cookies[TOKEN_KEY];
+  },
+}).unless({ path: ['/', '/login', '/users', '/room'] }));
+
+
+app.use((err, req, res, next) => {
+  if (err.name === 'UnauthorizedError') {
+    res.status(401).send('invalid token...');
+  }
+});
 
 app.get('/roomInfo', (req, res) => {
   res.status(200).send('this is the protected room info');

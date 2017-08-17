@@ -1,5 +1,6 @@
 import React from 'react';
 import $ from 'jquery';
+import history from '../../config/history';
 
 
 class ChatWidget extends React.Component {
@@ -13,12 +14,20 @@ class ChatWidget extends React.Component {
   }
 
   componentWillMount() {
-    this.socket = io();
-    this.socket.on('message arrived', (answer) => {
-      this.setState({ messages: this.state.messages.concat(answer)});
-    });
-    this.socket.on('participants updated', (participants) => {
-      this.setState({ participants });
+    //TODO: move it to the service
+    $.get('/roomInfo').done(() => {
+      this.socket = io();
+      this.socket.on('message arrived', (answer) => {
+        this.setState({ messages: this.state.messages.concat(answer)});
+      });
+      this.socket.on('participants updated', (participants) => {
+        this.setState({ participants });
+      });
+    })
+    .fail( e => {
+      if (e.status === 401) {
+        history.replace('/');
+      }
     });
   }
 
