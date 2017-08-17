@@ -1,6 +1,5 @@
 import React from 'react';
 import $ from 'jquery';
-import './styles/main.sass';
 
 
 class ChatWidget extends React.Component {

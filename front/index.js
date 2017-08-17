@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, Switch } from 'react-router';
+import './styles/style.sass';
 import App from './components/App';
 import HomePage from './pages/HomePage';
 import RoomPage from './pages/RoomPage';
 import NotFoundPage from './pages/NotFoundPage';
-import './style.sass';
 import history from './config/history';
 
 
