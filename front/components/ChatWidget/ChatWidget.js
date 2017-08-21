@@ -1,6 +1,6 @@
 import React from 'react';
 import $ from 'jquery';
-import history from '../../config/history';
+import RoomService from '../../services/room';
 
 
 class ChatWidget extends React.Component {
@@ -13,27 +13,21 @@ class ChatWidget extends React.Component {
     };
   }
 
+  newMessageHandler = (message) => {
+    this.setState({ messages: this.state.messages.concat(message) });
+  }
+
+  participantsUpdateHandler = (participants) => {
+    this.setState({ participants });
+  }
+
   componentWillMount() {
-    //TODO: move it to the service
-    $.get('/roomInfo').done(() => {
-      this.socket = io();
-      this.socket.on('message arrived', (answer) => {
-        this.setState({ messages: this.state.messages.concat(answer)});
-      });
-      this.socket.on('participants updated', (participants) => {
-        this.setState({ participants });
-      });
-    })
-    .fail( e => {
-      if (e.status === 401) {
-        history.replace('/');
-      }
-    });
+    RoomService.enterTheRoom(this.newMessageHandler, this.participantsUpdateHandler);
   }
 
   handleMessageSend = () => {
     const message = $(this.inputMessage).text();
-    this.socket.emit('chat message', message);
+    RoomService.sendMessage(message);
     $(this.inputMessage).text('');
   }
 
