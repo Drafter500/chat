@@ -1,13 +1,23 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 
 class LogoutButton extends React.Component {
 
   render() {
     return (
-      <button className="logoutButton">Logout</button>
+      <button
+        className="logoutButton"
+        onClick={this.props.onClick}
+      >
+        Logout
+      </button>
     );
   }
 }
+
+LogoutButton.prototypes = {
+  onClick: PropTypes.func.isRequired,
+};
 
 export default LogoutButton;

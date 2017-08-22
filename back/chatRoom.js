@@ -22,5 +22,13 @@ export default function initializeChat(server) {
     socket.on('chat message', (msg) => {
       io.emit('message arrived', `${user}: ${msg}`);
     });
+
+    socket.on('disconnect', () => {
+      const userIndex = participants.findIndex(p => p.username === credentials.username);
+      if (userIndex >= 0) {
+        participants.splice(userIndex, 1);
+        io.emit('participants updated', participants);
+      }
+    });
   });
 }

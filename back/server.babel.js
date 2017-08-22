@@ -51,6 +51,10 @@ app.post('/login', (req, res) => {
   res.cookie(TOKEN_KEY, token).sendStatus(200);
 });
 
+app.post('/logout', (req, res) => {
+  res.cookie(TOKEN_KEY, '').sendStatus(200);
+});
+
 app.get('/room', (req, res) => res.sendFile(path.resolve(__dirname, '../public/index.html')));
 
 app.get('/users', (req, res) => {

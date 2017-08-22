@@ -4,12 +4,13 @@ import history from '../config/history';
 
 const RoomService = {
   enterTheRoom(newMessageHandler, participantsUpdateHandler) {
+    const room = this;
     $.get('/roomInfo').done(() => {
-      this.socket = io();
-      this.socket.on('message arrived', (answer) => {
+      room.socket = io();
+      room.socket.on('message arrived', (answer) => {
         newMessageHandler(answer);
       });
-      this.socket.on('participants updated', (participants) => {
+      room.socket.on('participants updated', (participants) => {
         participantsUpdateHandler(participants);
       });
     })
@@ -22,6 +23,11 @@ const RoomService = {
 
   sendMessage(message) {
     this.socket.emit('chat message', message);
+  },
+
+  leaveTheRoom() {
+    this.socket.disconnect(true);
+    history.replace('/');
   },
 };
 
