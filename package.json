@@ -8,7 +8,8 @@
     "express-server": "node ./back/server",
     "nodemon": "nodemon back/server.js \"npm run express-server\"",
     "dev": "concurrent --kill-others \"npm run webpack-watch\" \"npm run nodemon\"",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npm run dev"
   },
   "author": "Vladimir Zemtsov",
   "license": "ISC",
