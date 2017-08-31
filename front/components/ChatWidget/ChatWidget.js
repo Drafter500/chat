@@ -41,29 +41,32 @@ class ChatWidget extends React.Component {
   render() {
     return (
       <section className="chatWidget">
-        <div className="chatWidget-messageBox">
-        {
-          this.state.messages.map(msg => <p>{msg}</p>)
-        }
-        </div>
-        <div className="chatWidget-participantList">
-        {
-          this.state.participants.map(user => <p>{user.username}</p>)
-        }
+        <div className="chatWidget-body">
+          <div className="chatWidget-body-messageBox">
+          {
+            this.state.messages.map(msg => <p className="chatWidget-body-messageBox-message">{msg}</p>)
+          }
+          </div>
+          <div className="chatWidget-body-participantList">
+          {
+            this.state.participants.map(user => <p>{user.username}</p>)
+          }
+          </div>
         </div>
         <div className="chatWidget-controlsPanel">
-          <span
+          <div
             className="chatWidget-controlsPanel-textInput"
             contentEditable
             ref={(el) => { this.inputMessage = el; }}
             onKeyPress={this.handleInputKeyPress}
-           />
+          />
           <button
             className="chatWidget-controlsPanel-sendButton"
             onClick={this.handleMessageSend}
           >
             Send
           </button>
+
         </div>
       </section>
     );

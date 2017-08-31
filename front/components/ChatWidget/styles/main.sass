@@ -3,18 +3,27 @@ $border-color: lighten($brand-4, 20%);
 .chatWidget
   margin: 10px 0
   min-height: 100px
-  display: flex
-  flex-wrap: wrap
 
-  &-messageBox
-    height: calc(100vh - 120px)
-    border-right: 1px solid $border-color
-    flex-grow: 1
+  &-body
+    display: flex
+    flex-wrap: nowrap
+    flex-direction: row
+    width: 100%
+    justify-content: stretch
 
-  &-participantList
-    width: 100px
-    flex-basis: 250px
-    padding: 0 10px
+    &-messageBox
+      height: calc(100vh - 150px)
+      border-right: 1px solid $border-color
+      flex-grow: 1
+      overflow-y: auto
+      min-width: 0
+
+      &-message
+        word-wrap: break-word
+
+    &-participantList
+      padding: 0 10px
+      min-width: 250px
 
   &-controlsPanel
     margin-top: 10px
@@ -23,5 +32,9 @@ $border-color: lighten($brand-4, 20%);
     display: flex
 
     &-textInput
-      display: inline-block
       flex-grow: 1
+      height: 50px
+      word-break: break-word
+
+    &-sendButton
+      float: right
