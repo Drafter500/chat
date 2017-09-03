@@ -49,7 +49,12 @@ class ChatWidget extends React.Component {
           </div>
           <div className="chatWidget-body-participantList">
           {
-            this.state.participants.map(user => <p>{user.username}</p>)
+            this.state.participants.map(user => (
+            <p
+              className={`chatWidget-body-participantList--${user.gender}`}
+            >
+            {user.username}
+            </p>))
           }
           </div>
         </div>
