@@ -17,8 +17,17 @@ class ChatWidget extends React.Component {
     this.setState({ messages: this.state.messages.concat(message) });
   }
 
-  participantsUpdateHandler = (participants) => {
-    this.setState({ participants });
+  participantsUpdateHandler = (paricipants, details) => {
+    this.setState({ paricipants });
+    if (details && details.event && details.credentials) {
+      let participantEvent;
+      if (['connected', 'disconnected'].includes(details.event)) {
+        const verb = details.event === 'connected' ? 'joined' : 'left';
+        participantEvent = `${details.credentials.username} has ${verb}...`;
+      }
+
+      participantEvent && this.setState({ messages: this.state.messages.concat(participantEvent) });
+    }
   }
 
   componentWillMount() {

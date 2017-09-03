@@ -10,8 +10,8 @@ const RoomService = {
       room.socket.on('message arrived', (answer) => {
         newMessageHandler(answer);
       });
-      room.socket.on('participants updated', (participants) => {
-        participantsUpdateHandler(participants);
+      room.socket.on('participants updated', (participants, details) => {
+        participantsUpdateHandler(participants, details);
       });
     })
     .fail((e) => {

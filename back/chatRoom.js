@@ -15,8 +15,7 @@ export default function initializeChat(server) {
 
     // TODO: process credentials, check if user exists, if not, add him to the list
     participants.push(credentials);
-    io.emit('participants updated', participants);
-
+    io.emit('participants updated', participants, { credentials, event: 'connected' });
     console.log('user connected');
     const user = credentials.username;
     socket.on('chat message', (msg) => {
@@ -27,7 +26,7 @@ export default function initializeChat(server) {
       const userIndex = participants.findIndex(p => p.username === credentials.username);
       if (userIndex >= 0) {
         participants.splice(userIndex, 1);
-        io.emit('participants updated', participants);
+        io.emit('participants updated', participants, { credentials, event: 'disconnected' });
       }
     });
   });
