@@ -15,10 +15,10 @@ class ChatWidget extends React.Component {
 
   newMessageHandler = (message) => {
     this.setState({ messages: this.state.messages.concat(message) });
+    this.messageBox.scrollTop = this.messageBox.scrollHeight;
   }
 
   participantsUpdateHandler = (participants, details) => {
-    console.log(participants);
     this.setState({ participants });
     if (details && details.event && details.credentials) {
       let participantEvent;
@@ -56,7 +56,10 @@ class ChatWidget extends React.Component {
     return (
       <section className="chatWidget">
         <div className="chatWidget-body">
-          <div className="chatWidget-body-messageBox">
+          <div
+            ref={(mb) => { this.messageBox = mb; }}
+            className="chatWidget-body-messageBox"
+          >
           {
             this.state.messages.map(msg => <p className="chatWidget-body-messageBox-message">{msg}</p>)
           }
