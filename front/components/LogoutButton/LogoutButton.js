@@ -16,7 +16,7 @@ class LogoutButton extends React.Component {
   }
 }
 
-LogoutButton.prototypes = {
+LogoutButton.propTypes = {
   onClick: PropTypes.func.isRequired,
 };
 

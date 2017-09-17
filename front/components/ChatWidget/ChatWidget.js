@@ -1,9 +1,9 @@
 import React from 'react';
 import $ from 'jquery';
 import RoomService from '../../services/room';
+import Message from './_Message/Message';
+import { CONNECTION_EVENT } from './constants';
 
-
-const CONNECTION_EVENT = 'connectionEvent';
 
 class ChatWidget extends React.Component {
 
@@ -68,14 +68,13 @@ class ChatWidget extends React.Component {
             className="chatWidget-body-messageBox"
           >
           {
-            this.state.messages.map(msg => (
-              <p className="chatWidget-body-messageBox-message">
-              { msg.type === CONNECTION_EVENT ?
-               <span className='chatWidget-body-messageBox-message--connectionEvent'>{`${msg.userName} ${msg.message}`}</span> :
-               `${msg.userName}: ${msg.message}`
-                }
-              </p>
-              ))
+            this.state.messages.map((msg, i) => (
+              <Message
+                key={i}
+                message={msg}
+                parentClassPrefix="chatWidget-body-messageBox"
+              />)
+            )
           }
           </div>
           <div className="chatWidget-body-participantList">
