@@ -16,14 +16,18 @@ export default function initializeChat(server) {
 
     // TODO: process credentials, check if user exists, if not, add him to the list
     participants.push(credentials);
+
     socket.emit('previous messages', messages.slice(-5));
     io.emit('participants updated', participants, { credentials, event: 'connected' });
-    console.log('user connected');
-    const user = credentials.username;
-    socket.on('chat message', (msg) => {
-      const messageString = `${user}: ${msg}`;
-      messages.push(messageString);
-      io.emit('message arrived', messageString);
+
+    const userName = credentials.username;
+    socket.on('chat message', (message) => {
+      const newMessage = {
+        userName,
+        message,
+      };
+      messages.push(newMessage);
+      io.emit('message arrived', newMessage);
     });
 
     socket.on('disconnect', () => {

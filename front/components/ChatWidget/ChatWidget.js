@@ -3,6 +3,8 @@ import $ from 'jquery';
 import RoomService from '../../services/room';
 
 
+const CONNECTION_EVENT = 'connectionEvent';
+
 class ChatWidget extends React.Component {
 
   constructor(props) {
@@ -24,7 +26,11 @@ class ChatWidget extends React.Component {
       let participantEvent;
       if (['connected', 'disconnected'].includes(details.event)) {
         const verb = details.event === 'connected' ? 'joined' : 'left';
-        participantEvent = `${details.credentials.username} has ${verb}...`;
+        participantEvent = {
+          userName: details.credentials.username,
+          message: `has ${verb}...`,
+          type: CONNECTION_EVENT,
+        }
       }
 
       participantEvent && this.setState({ messages: this.state.messages.concat(participantEvent) });
@@ -52,6 +58,7 @@ class ChatWidget extends React.Component {
     }
   }
 
+  // TODO: refactor this method, split into smaller components
   render() {
     return (
       <section className="chatWidget">
@@ -61,7 +68,14 @@ class ChatWidget extends React.Component {
             className="chatWidget-body-messageBox"
           >
           {
-            this.state.messages.map(msg => <p className="chatWidget-body-messageBox-message">{msg}</p>)
+            this.state.messages.map(msg => (
+              <p className="chatWidget-body-messageBox-message">
+              { msg.type === CONNECTION_EVENT ?
+               <span className='chatWidget-body-messageBox-message--connectionEvent'>{`${msg.userName} ${msg.message}`}</span> :
+               `${msg.userName}: ${msg.message}`
+                }
+              </p>
+              ))
           }
           </div>
           <div className="chatWidget-body-participantList">

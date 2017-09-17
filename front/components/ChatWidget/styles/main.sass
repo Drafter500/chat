@@ -18,8 +18,11 @@ $border-color: lighten($brand-4, 20%);
       overflow-y: auto
       min-width: 0
 
-      &-message
+      &-message, &-message--connectionEvent
         word-wrap: break-word
+
+      &-message--connectionEvent
+        font-style: italic
 
     &-participantList
       padding: 0 10px
