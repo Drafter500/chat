@@ -17,8 +17,9 @@ class ChatWidget extends React.Component {
     this.setState({ messages: this.state.messages.concat(message) });
   }
 
-  participantsUpdateHandler = (paricipants, details) => {
-    this.setState({ paricipants });
+  participantsUpdateHandler = (participants, details) => {
+    console.log(participants);
+    this.setState({ participants });
     if (details && details.event && details.credentials) {
       let participantEvent;
       if (['connected', 'disconnected'].includes(details.event)) {
@@ -30,8 +31,12 @@ class ChatWidget extends React.Component {
     }
   }
 
+  previousMessagesHandler = (oldMessages) => {
+    this.setState({ messages: this.state.messages.concat(oldMessages)});
+  }
+
   componentWillMount() {
-    RoomService.enterTheRoom(this.newMessageHandler, this.participantsUpdateHandler);
+    RoomService.enterTheRoom(this.newMessageHandler, this.participantsUpdateHandler, this.previousMessagesHandler);
   }
 
   handleMessageSend = () => {

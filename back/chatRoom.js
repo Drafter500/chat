@@ -8,6 +8,7 @@ export default function initializeChat(server) {
   const io = socketIo.listen(server);
 
   const participants = [];
+  const messages = [];
 
   io.on('connection', (socket) => {
     const cookieParsed = cookie.parse(socket.request.headers.cookie);
@@ -15,11 +16,14 @@ export default function initializeChat(server) {
 
     // TODO: process credentials, check if user exists, if not, add him to the list
     participants.push(credentials);
+    socket.emit('previous messages', messages.slice(-5));
     io.emit('participants updated', participants, { credentials, event: 'connected' });
     console.log('user connected');
     const user = credentials.username;
     socket.on('chat message', (msg) => {
-      io.emit('message arrived', `${user}: ${msg}`);
+      const messageString = `${user}: ${msg}`;
+      messages.push(messageString);
+      io.emit('message arrived', messageString);
     });
 
     socket.on('disconnect', () => {

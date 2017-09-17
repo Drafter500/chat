@@ -3,7 +3,7 @@ import history from '../config/history';
 
 
 const RoomService = {
-  enterTheRoom(newMessageHandler, participantsUpdateHandler) {
+  enterTheRoom(newMessageHandler, participantsUpdateHandler, prevMessagesHandler) {
     const room = this;
     $.get('/roomInfo').done(() => {
       room.socket = io();
@@ -12,6 +12,9 @@ const RoomService = {
       });
       room.socket.on('participants updated', (participants, details) => {
         participantsUpdateHandler(participants, details);
+      });
+      room.socket.on('previous messages', (messages) => {
+        prevMessagesHandler(messages);
       });
     })
     .fail((e) => {
