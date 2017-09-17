@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import history from '../config/history';
+import { redirectToHome } from '../config/history';
 
 
 const RoomService = {
@@ -19,7 +19,7 @@ const RoomService = {
     })
     .fail((e) => {
       if (e.status === 401) {
-        history.replace('/');
+        redirectToHome();
       }
     });
   },
@@ -30,7 +30,7 @@ const RoomService = {
 
   leaveTheRoom() {
     this.socket.disconnect(true);
-    history.replace('/');
+    redirectToHome();
   },
 };
 
