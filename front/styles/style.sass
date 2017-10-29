@@ -1,6 +1,9 @@
+$textShadow: 0 2px 1px rgba(0, 0, 0, 0.4)
+
 @import './colorSchema'
 @import '../components/ChatWidget/styles/main'
 @import '../components/LogoutButton/styles/main'
+@import '../components/Login/styles/main.sass';
 
 body
 	font-family: 'Rubik'
@@ -23,29 +26,7 @@ body
 	&-logo
 		text-decoration: none
 		color: inherit
-		text-shadow: 0 2px 1px rgba(0, 0, 0, 0.4)
-
+		text-shadow: $textShadow
 
 .main
 	padding: 0px 12px
-
-
-.form-item
-	span
-		display: inline-block
-		width: 100px
-		text-align: right
-		margin-right: 8px
-
-
-.enter-form
-	input, select
-		border: 1px solid #5A5d5A
-		border-radius: 3px
-		margin: 3px
-		outline: none
-		padding: 5px
-		width: 150px
-
-	select
-		width: 162px

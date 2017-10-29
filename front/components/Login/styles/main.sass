@@ -1,0 +1,32 @@
+.enterForm
+  &-item
+    display: flex
+    align-items: center
+    flex-wrap: wrap
+
+    &-input
+      border: 1px solid $brand-4
+      border-radius: 3px
+      margin: 3px
+      padding: 5px
+      flex-basis: 180px
+      box-sizing: content-box
+
+    &-label
+      margin-right: 8px
+      margin-left: auto
+
+    &-button
+      width: 100%
+      border: none
+      border-radius: 3px
+      background-color: $brand-1
+      font-weight: bold
+      font-size: 16px
+      color: $brand-2
+      text-shadow: $textShadow
+      padding: 10px
+      cursor: pointer
+
+      &:hover
+        background-color: lighten($brand-1, 5%)

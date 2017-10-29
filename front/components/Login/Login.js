@@ -1,6 +1,6 @@
 import React from 'react';
 import $ from 'jquery';
-import AuthService from '../services/auth';
+import AuthService from '../../services/auth';
 
 
 class Login extends React.Component {
@@ -17,28 +17,31 @@ class Login extends React.Component {
     return (
       <form
         ref={(e) => this.form = e}
-        className="enter-form"
+        className="enterForm"
       >
-        <div className="form-item">
-          <span>Username: </span>
+        <div className="enterForm-item">
+          <span className="enterForm-item-label">Username: </span>
           <input
             ref={(e) => this.username = e}
+            className="enterForm-item-input"
             type="text"
             name="username"
             />
         </div>
-        <div className="form-item">
-          <span>Age: </span>
+        <div className="enterForm-item">
+          <span className="enterForm-item-label">Age: </span>
           <input
             ref={(e) => this.age = e}
+            className="enterForm-item-input"
             type="number"
             name="age"
             />
         </div>
-        <div className="form-item">
-            <span>Gender: </span>
+        <div className="enterForm-item">
+            <span className="enterForm-item-label">Gender: </span>
             <select
               ref={(e) => this.gender = e}
+              className="enterForm-item-input"
               name="gender"
             >
                 <option value="male">Male</option>
@@ -46,9 +49,10 @@ class Login extends React.Component {
             </select>
           </div>
         <br />
-        <div className="form-item">
+        <div className="enterForm-item">
           <button
             id="enter-button"
+            className="enterForm-item-button"
             onClick={this.handleLogin}
           >
             Enter the room
