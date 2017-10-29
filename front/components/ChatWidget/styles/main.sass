@@ -25,6 +25,7 @@ $border-color: lighten($brand-4, 20%);
         font-style: italic
 
     &-participantList
+      +respond-to(mobile) { display: none }
       padding: 0 10px
       flex-basis: 250px
 
