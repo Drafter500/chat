@@ -2,6 +2,7 @@ import React from 'react';
 import $ from 'jquery';
 import RoomService from '../../services/room';
 import Message from './_Message/Message';
+import ParticipantsList from './_ParticipantsList/ParticipantsList';
 import { CONNECTION_EVENT } from './constants';
 
 
@@ -77,16 +78,10 @@ class ChatWidget extends React.Component {
             )
           }
           </div>
-          <div className="chatWidget-body-participantList">
-          {
-            this.state.participants.map(user => (
-            <p
-              className={`chatWidget-body-participantList--${user.gender}`}
-            >
-            {user.username}
-            </p>))
-          }
-          </div>
+          <ParticipantsList
+            participants={this.state.participants}
+            parentClassPrefix='chatWidget-body'
+          />
         </div>
         <div className="chatWidget-controlsPanel">
           <div
