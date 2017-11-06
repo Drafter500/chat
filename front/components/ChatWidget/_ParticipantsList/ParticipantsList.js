@@ -1,22 +1,43 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import BackArrowIcon from '../../../icons/BackArrowIcon';
 
 
-function ParticipantsList(props) {
-  const { participants, className, parentClassPrefix } = props;
-  return (
-    <div className={`${parentClassPrefix}-participantList ${className}`}>
-      {
-        participants.map(user => (
-          <p
-            className={`${parentClassPrefix}-participantList--${user.gender}`}
-          >
-            {user.username}
-          </p>)
-          )
-      }
-    </div>
-  );
+class ParticipantsList extends React.Component {
+  closePanel = () => {
+
+  }
+
+  render() {
+    const {
+      participants,
+      closeHandler,
+      className,
+      parentClassPrefix,
+    } = this.props;
+
+    return (
+      <aside className={`${parentClassPrefix}-participantList ${className}`}>
+        <div
+          className={'chatWidget-body-participantList-backButton'}
+          onClick={closeHandler}
+        >
+          <BackArrowIcon
+            className={'chatWidget-body-participantList-backButton-icon'}
+          />
+        </div>
+        {
+          participants.map(user => (
+            <p
+              className={`${parentClassPrefix}-participantList--${user.gender}`}
+            >
+              {user.username}
+            </p>),
+            )
+        }
+      </aside>
+    );
+  }
 }
 
 ParticipantsList.propTypes = {
@@ -24,6 +45,7 @@ ParticipantsList.propTypes = {
     username: PropTypes.string,
     gender: PropTypes.string,
   }).isRequired,
+  closeHandler: PropTypes.func.isRequired,
   className: PropTypes.string.isRequired,
   parentClassPrefix: PropTypes.string.isRequired,
 };

@@ -9,7 +9,7 @@ $border-color: lighten($brand-4, 20%);
     display: flex
     flex-wrap: nowrap
     flex-direction: row
-    height: calc(100vh - #{$banner-height})
+    height: calc(100vh - 150px)
     width: 100%
     justify-content: stretch
 
@@ -25,7 +25,7 @@ $border-color: lighten($brand-4, 20%);
       &-message--connectionEvent
         font-style: italic
 
-    &-participantsToggle
+    &-openPanelButton
       +respond-to(mobile)
         display: block
         margin: 8px
@@ -33,6 +33,7 @@ $border-color: lighten($brand-4, 20%);
       display: none
       width: 30px
       height: 30px
+      flex: 0 0 auto
       cursor: pointer
 
       &-icon

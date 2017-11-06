@@ -4,7 +4,7 @@ import classnames from 'classnames';
 import RoomService from '../../services/room';
 import Message from './_Message/Message';
 import ParticipantsList from './_ParticipantsList/ParticipantsList';
-import UsersIcon from '../../icons/Users';
+import UsersIcon from '../../icons/UsersIcon';
 import { CONNECTION_EVENT } from './constants';
 
 
@@ -62,9 +62,13 @@ class ChatWidget extends React.Component {
     }
   }
 
-  togglePanel = () => {
-    this.setState({ panelExpanded: !this.state.panelExpanded });
-    console.log('toggle');
+  openPanel = () => {
+    this.setState({ panelExpanded: true });
+  }
+
+  closePanel = () => {
+    this.setState({ panelExpanded: false });
+    console.log('closing');
   }
 
   // TODO: refactor this method, split into smaller components
@@ -88,15 +92,16 @@ class ChatWidget extends React.Component {
           </div>
           <ParticipantsList
             participants={this.state.participants}
+            closeHandler={this.closePanel}
             className={classnames({'chatWidget-body-participantList--expanded': this.state.panelExpanded })}
             parentClassPrefix='chatWidget-body'
           />
           <div
-            className={'chatWidget-body-participantsToggle'}
-            onClick={this.togglePanel}
+            className={'chatWidget-body-openPanelButton'}
+            onClick={this.openPanel}
           >
             <UsersIcon
-              className={`chatWidget-body-participantsToggle-icon`}
+              className={`chatWidget-body-openPanelButton-icon`}
             />
           </div>
         </div>
