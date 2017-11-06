@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 
 
 function ParticipantsList(props) {
-  const { participants, parentClassPrefix } = props;
+  const { participants, className, parentClassPrefix } = props;
   return (
-    <div className={`${parentClassPrefix}-participantList`}>
+    <div className={`${parentClassPrefix}-participantList ${className}`}>
       {
         participants.map(user => (
           <p
@@ -24,6 +24,7 @@ ParticipantsList.propTypes = {
     username: PropTypes.string,
     gender: PropTypes.string,
   }).isRequired,
+  className: PropTypes.string.isRequired,
   parentClassPrefix: PropTypes.string.isRequired,
 };
 

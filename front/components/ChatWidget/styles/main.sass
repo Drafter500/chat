@@ -25,13 +25,15 @@ $border-color: lighten($brand-4, 20%);
       &-message--connectionEvent
         font-style: italic
 
-
-
     &-participantsToggle
-      +respond-to(mobile) { display: block; }
+      +respond-to(mobile)
+        display: block
+        margin: 8px
+
       display: none
       width: 30px
       height: 30px
+      cursor: pointer
 
       &-icon
         width: 100%

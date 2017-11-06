@@ -1,5 +1,6 @@
 import React from 'react';
 import $ from 'jquery';
+import classnames from 'classnames';
 import RoomService from '../../services/room';
 import Message from './_Message/Message';
 import ParticipantsList from './_ParticipantsList/ParticipantsList';
@@ -14,6 +15,7 @@ class ChatWidget extends React.Component {
     this.state = {
       messages: [],
       participants: [],
+      panelExpanded: false,
     };
   }
 
@@ -60,6 +62,11 @@ class ChatWidget extends React.Component {
     }
   }
 
+  togglePanel = () => {
+    this.setState({ panelExpanded: !this.state.panelExpanded });
+    console.log('toggle');
+  }
+
   // TODO: refactor this method, split into smaller components
   render() {
     return (
@@ -81,9 +88,13 @@ class ChatWidget extends React.Component {
           </div>
           <ParticipantsList
             participants={this.state.participants}
+            className={classnames({'chatWidget-body-participantList--expanded': this.state.panelExpanded })}
             parentClassPrefix='chatWidget-body'
           />
-          <div className={`chatWidget-body-participantsToggle`}>
+          <div
+            className={'chatWidget-body-participantsToggle'}
+            onClick={this.togglePanel}
+          >
             <UsersIcon
               className={`chatWidget-body-participantsToggle-icon`}
             />
