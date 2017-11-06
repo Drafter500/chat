@@ -1,0 +1,23 @@
+$panel-max-width: 250px
+
+.chatWidget-body
+  &-participantList
+    @include respond-to(mobile)
+      position: fixed
+      top: $banner-height
+      right: -$panel-max-width
+      flex-basis: $panel-max-width
+
+    position: relative;
+    background-color: lighten($brand-2, 40%)
+    padding: 0 10px
+    flex-basis: 40%
+    max-width: $panel-max-width
+
+    &--male
+      color: $male-color
+
+    &--female
+      color: $female-color
+
+    &--visible

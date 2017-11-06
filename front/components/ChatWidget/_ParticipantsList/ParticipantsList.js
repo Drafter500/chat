@@ -6,16 +6,16 @@ function ParticipantsList(props) {
   const { participants, parentClassPrefix } = props;
   return (
     <div className={`${parentClassPrefix}-participantList`}>
-        {
+      {
         participants.map(user => (
           <p
             className={`${parentClassPrefix}-participantList--${user.gender}`}
           >
-           {user.username}
+            {user.username}
           </p>)
-        )
-    }
-      </div>
+          )
+      }
+    </div>
   );
 }
 

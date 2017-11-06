@@ -3,6 +3,7 @@ import $ from 'jquery';
 import RoomService from '../../services/room';
 import Message from './_Message/Message';
 import ParticipantsList from './_ParticipantsList/ParticipantsList';
+import UsersIcon from '../../icons/Users';
 import { CONNECTION_EVENT } from './constants';
 
 
@@ -82,6 +83,11 @@ class ChatWidget extends React.Component {
             participants={this.state.participants}
             parentClassPrefix='chatWidget-body'
           />
+          <div className={`chatWidget-body-participantsToggle`}>
+            <UsersIcon
+              className={`chatWidget-body-participantsToggle-icon`}
+            />
+          </div>
         </div>
         <div className="chatWidget-controlsPanel">
           <div
