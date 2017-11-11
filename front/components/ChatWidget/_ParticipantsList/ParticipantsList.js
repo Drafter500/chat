@@ -27,8 +27,9 @@ class ParticipantsList extends React.Component {
           />
         </div>
         {
-          participants.map(user => (
+          participants.map((user, index) => (
             <p
+              key={index}
               className={`${parentClassPrefix}-participantList--${user.gender}`}
             >
               {user.username}
@@ -41,10 +42,10 @@ class ParticipantsList extends React.Component {
 }
 
 ParticipantsList.propTypes = {
-  participants: PropTypes.shape({
+  participants: PropTypes.arrayOf(PropTypes.shape({
     username: PropTypes.string,
     gender: PropTypes.string,
-  }).isRequired,
+  })).isRequired,
   closeHandler: PropTypes.func.isRequired,
   className: PropTypes.string.isRequired,
   parentClassPrefix: PropTypes.string.isRequired,

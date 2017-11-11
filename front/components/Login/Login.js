@@ -3,15 +3,22 @@ import $ from 'jquery';
 import AuthService from '../../services/auth';
 
 
+const MIN_AGE = 6;
+const MAX_AGE = 99;
+
+function getAges() {
+  return Array(MAX_AGE + 1).fill().map((v, i) => i).slice(MIN_AGE);
+}
+
 class Login extends React.Component {
 
   handleLogin = (e) => {
     e.preventDefault();
     const data = {};
+    //TODO: validate inputs
     $(this.form).serializeArray().forEach(item => data[item.name] = item.value);
     AuthService.login(data);
   }
-
 
   render() {
     return (
@@ -30,12 +37,22 @@ class Login extends React.Component {
         </div>
         <div className="enterForm-item">
           <span className="enterForm-item-label">Age: </span>
-          <input
+          <select
             ref={(e) => this.age = e}
             className="enterForm-item-input"
             type="number"
             name="age"
-            />
+            required="true"
+          >
+            {getAges().map(age => (
+              <option
+                value={age}
+                key={age}
+              >
+                {age}
+              </option>
+            ))}
+          </select>
         </div>
         <div className="enterForm-item">
             <span className="enterForm-item-label">Gender: </span>
