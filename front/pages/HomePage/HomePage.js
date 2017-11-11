@@ -1,6 +1,6 @@
 import React from 'react';
 import Login from '../../components/Login/Login';
-import './styles/main.sass';
+import './styles/_main.sass';
 
 
 class HomePage extends React.Component {
