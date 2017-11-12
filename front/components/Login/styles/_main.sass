@@ -1,5 +1,11 @@
 .enterForm
+  +respond-to(mobile)
+    max-width: 200px
+
   text-align: center
+  max-width: 320px
+  margin-left: auto
+  margin-right: auto
 
   &-item
     display: flex
@@ -15,6 +21,9 @@
       flex-basis: 200px
       box-sizing: content-box
 
+      &--invalid
+        border-color: $color-danger
+
     &-label
       +respond-to(mobile)
         margin-left: $base-gap/2
@@ -24,6 +33,13 @@
       margin-right: $base-gap
       text-align: right
       flex-basis: 90px
+
+    &-validationMessage
+      color: $color-danger
+      font-style: italic
+      font-size: 10px
+      margin-left: auto
+      margin-right: $base-gap
 
     &-button
       width: 200px

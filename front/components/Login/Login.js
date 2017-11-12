@@ -1,5 +1,6 @@
 import React from 'react';
 import $ from 'jquery';
+import classnames from 'classnames';
 import AuthService from '../../services/auth';
 
 
@@ -12,12 +13,27 @@ function getAges() {
 
 class Login extends React.Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      nameValid: true,
+    };
+  }
+
   handleLogin = (e) => {
     e.preventDefault();
     const data = {};
-    //TODO: validate inputs
     $(this.form).serializeArray().forEach(item => data[item.name] = item.value);
-    AuthService.login(data);
+
+    if (data.username) {
+      AuthService.login(data);
+    } else {
+      this.setState({nameValid: false});
+    }
+  }
+
+  onUserNameInputChange = () => {
+    this.setState({nameValid: true});
   }
 
   render() {
@@ -30,10 +46,17 @@ class Login extends React.Component {
           <span className="enterForm-item-label">Username: </span>
           <input
             ref={(e) => this.username = e}
-            className="enterForm-item-input"
+            className={classnames("enterForm-item-input", { "enterForm-item-input--invalid" : !this.state.nameValid })}
+            onChange={this.onUserNameInputChange}
             type="text"
             name="username"
-            />
+          />
+          {
+            !this.state.nameValid &&
+            <span className="enterForm-item-validationMessage">
+              User name should be filled
+            </span>
+          }
         </div>
         <div className="enterForm-item">
           <span className="enterForm-item-label">Age: </span>
