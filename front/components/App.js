@@ -1,6 +1,6 @@
 import React from 'react';
 import propTypes from 'prop-types';
-import Header from './Header';
+import Header from '../components/Header/Header';
 import LogoutButton from './LogoutButton/LogoutButton';
 import history from '../config/history';
 import AuthService from '../services/auth';

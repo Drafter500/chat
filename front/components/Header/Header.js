@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 
 function Header(props) {
   return (
-    <div className="topPanel">
+    <header className="topPanel">
       <a href="/" className="topPanel-logo">Nice Chat</a>
       {props.children}
-    </div>
+    </header>
   );
 }
 
