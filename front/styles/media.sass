@@ -1,12 +1,12 @@
-$small: 420px;
-$large: 1024px;
+$small-screen-width: 420px
+$large-screen-width: 1024px
 
 =respond-to($media)
   @if $media == mobile
-    @media only screen and (max-width: $small) { @content; }
+    @media only screen and (max-width: $small-screen-width) { @content; }
 
   @else if $media == tablet
-    @media only screen and (min-width: $small + 1) and (max-width: $large - 1) { @content; }
+    @media only screen and (min-width: $small-screen-width + 1) and (max-width: $large-screen-width - 1) { @content; }
 
   @else if $media == desktop
-    @media only screen and (min-width: $large) { @content; }
+    @media only screen and (min-width: $large-screen-width) { @content; }

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, Switch } from 'react-router';
-import './styles/style.sass';
+import './styles/_main.sass';
 import App from './components/App';
 import HomePage from './pages/HomePage/HomePage';
 import RoomPage from './pages/RoomPage';

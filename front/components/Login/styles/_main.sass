@@ -1,23 +1,32 @@
 .enterForm
+  text-align: center
+
   &-item
     display: flex
     align-items: center
     flex-wrap: wrap
+    justify-content: center
 
     &-input
       border: 1px solid $brand-4
       border-radius: 3px
-      margin: 3px
-      padding: 5px
-      flex-basis: 180px
+      margin: $base-gap/2
+      padding: $base-gap/2
+      flex-basis: 200px
       box-sizing: content-box
 
     &-label
-      margin-right: 8px
-      margin-left: auto
+      +respond-to(mobile)
+        margin-left: $base-gap/2
+        text-align: left
+        flex-basis: 200px
+
+      margin-right: $base-gap
+      text-align: right
+      flex-basis: 90px
 
     &-button
-      width: 100%
+      width: 200px
       border: none
       border-radius: 3px
       background-color: $brand-1
@@ -25,7 +34,7 @@
       font-size: 16px
       color: $brand-2
       text-shadow: $textShadow
-      padding: 10px
+      padding: $base-gap
       cursor: pointer
 
       &:hover
