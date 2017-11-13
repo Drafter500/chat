@@ -47,8 +47,12 @@ app.post('/login', (req, res) => {
 
   const { username, age, gender } = req.body;
 
-  const token = jwt.sign({ username, age, gender }, 'the real true secret');
-  res.cookie(TOKEN_KEY, token).sendStatus(200);
+  if (chatRoom.participants.find(p => p.username === username.trim())) {
+    res.status(401).send('Such user already in the room');
+  } else {
+    const token = jwt.sign({ username, age, gender }, 'the real true secret');
+    res.cookie(TOKEN_KEY, token).sendStatus(200);
+  }
 });
 
 app.post('/logout', (req, res) => {

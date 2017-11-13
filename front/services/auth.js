@@ -5,9 +5,10 @@ import RoomService from './room';
 
 const AuthService = {
   login(userData) {
-    $.post('login', userData).done(() => {
-      history.replace('/room');
-    });
+    return $.post('login', userData)
+      .done(() => {
+        history.replace('/room');
+      });
   },
 
   logout() {

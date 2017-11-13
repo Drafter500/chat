@@ -20,7 +20,7 @@ class ChatRoom {
       socket.emit('previous messages', this.messages.slice(-PREVIOUS_MESSAGES_COUNT));
       io.emit('participants updated', this.participants, { credentials, event: 'connected' });
 
-      const userName = credentials.username;
+      const userName = credentials.username.trim();
       socket.on('chat message', (message) => {
         const newMessage = {
           userName,

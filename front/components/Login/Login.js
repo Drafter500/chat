@@ -17,6 +17,7 @@ class Login extends React.Component {
     super(props);
     this.state = {
       nameValid: true,
+      nameErrorMessage: '',
     };
   }
 
@@ -25,15 +26,18 @@ class Login extends React.Component {
     const data = {};
     $(this.form).serializeArray().forEach(item => data[item.name] = item.value);
 
-    if (data.username) {
-      AuthService.login(data);
+    if (data.username.trim()) {
+      AuthService.login(data)
+        .fail((jqXHR) => {
+          this.setState({ nameValid: false, nameErrorMessage: jqXHR.responseText });
+        });
     } else {
-      this.setState({nameValid: false});
+      this.setState({ nameValid: false, nameErrorMessage: 'User name should be filled' });
     }
   }
 
   onUserNameInputChange = () => {
-    this.setState({nameValid: true});
+    this.setState({ nameValid: true });
   }
 
   render() {
@@ -54,7 +58,7 @@ class Login extends React.Component {
           {
             !this.state.nameValid &&
             <span className="enterForm-item-validationMessage">
-              User name should be filled
+              { this.state.nameErrorMessage }
             </span>
           }
         </div>
