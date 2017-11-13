@@ -4,7 +4,7 @@ import express from 'express';
 import jwt from 'jsonwebtoken';
 import expressJwt from 'express-jwt';
 import cookieParser from 'cookie-parser';
-import chatRoom from './chatRoom';
+import ChatRoom from './chatRoom';
 import { TOKEN_KEY } from './constants';
 
 
@@ -14,8 +14,8 @@ const server = app.listen(process.env.PORT || 3000, () => {
   console.log('Server is running');
 });
 
-// Initialize chat wiht sockets
-chatRoom(server);
+// Initialize chat with sockets
+const chatRoom = new ChatRoom(server);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
